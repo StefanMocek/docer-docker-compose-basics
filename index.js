@@ -2,7 +2,10 @@ const express = require("express");
 const redis = require("redis");
 
 const app = express();
-const client = redis.createClient();
+const client = redis.createClient({
+  host: "redis-server",
+  port: 6379
+});
 
 client.set("visits", 0);
 
@@ -13,11 +16,9 @@ app.get("/", (req, res) => {
   })
 })
 
-const port = process.env.PORT || 3000;
-
 const start = async () => {
   try {
-    app.listen(port, () =>
+    app.listen(5000, () =>
       console.log(`Server is listening on port ${port}...`)
     );
   } catch (error) {
