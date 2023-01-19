@@ -3,6 +3,11 @@ services:
   redis-server:
     image: "redis"
   node-app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - "5000:5000"
+    volumes:
+      - /app/node_modules/
+      - .:/app
